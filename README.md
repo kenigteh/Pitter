@@ -1,2 +1,2 @@
-# trainee-django-base
-Base trainee project
+# Pitter
+The social network.
