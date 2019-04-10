@@ -7,6 +7,7 @@ import uuid
 from django.core.files.storage import FileSystemStorage
 from base_app.constants import audio_files_path
 
+
 class UploadAudioFile(APIView):
     def post(self, request, format=None):
         if 'audio_file' not in request.data:
