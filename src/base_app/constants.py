@@ -5,3 +5,5 @@ REQ_DATA = {
     "encoding": "FLAC",
     "languageCode": "ru-RU"
 }
+
+rest_file_type = "<class 'django.core.files.uploadedfile.InMemoryUploadedFile'>"
