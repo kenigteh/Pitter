@@ -1,7 +1,9 @@
+from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from base_app.serializers.user_serializer import UserSerializer
+from base_app.models.user import User
 
 
 class UserManager(APIView):
@@ -14,4 +16,11 @@ class UserManager(APIView):
         return Response(serializer.errors, status=400)
 
     def get(self, request):
-        pass
+        try:
+            login = request.data['login']
+            user = User.objects.get(login=login)
+            serializer = UserSerializer(user)
+            return JsonResponse(serializer.data)
+        except Exception as e:
+            data = {"error": str(e)}
+            return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
