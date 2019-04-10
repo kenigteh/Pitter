@@ -40,5 +40,7 @@ class UploadAudioFile(APIView):
             data = {"status": audio_text}
             return Response(data, status=status.HTTP_200_OK)
         except Exception as e:
+            fs = FileSystemStorage(location='/media/audios')
+            fs.delete(audio_file_name)
             data = {"status": str(e)}
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
