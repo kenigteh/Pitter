@@ -27,7 +27,7 @@ class UploadAudioFile(APIView):
         # Пытаемся сохранить:
         audio_file_name = str(uuid.uuid4())
         try:
-            fs = FileSystemStorage(location='/media/audios')
+            fs = FileSystemStorage()
             fs.save(audio_file_name, audio_file)
             audio_file = fs.open(audio_file_name)
         except Exception as e:
@@ -40,7 +40,7 @@ class UploadAudioFile(APIView):
             data = {"status": audio_text}
             return Response(data, status=status.HTTP_200_OK)
         except Exception as e:
-            fs = FileSystemStorage(location='/media/audios')
+            fs = FileSystemStorage()
             fs.delete(audio_file_name)
             data = {"status": str(e)}
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
