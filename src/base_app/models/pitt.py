@@ -2,6 +2,7 @@ from django.db import models
 import uuid
 from datetime import datetime
 
+
 class Pitt(models.Model):
     pitt_id = models.CharField(max_length=128, default=uuid.uuid4, primary_key=True)
     user_id = models.CharField(max_length=128)
