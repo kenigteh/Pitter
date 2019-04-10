@@ -58,6 +58,18 @@ MIDDLEWARE = [
     'base_app.middleware.BaseAppRequestDecoder',
 ]
 
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': '5432'
+    }
+}
+
 ROOT_URLCONF = 'base_app.urls'
 
 TEMPLATES = [
