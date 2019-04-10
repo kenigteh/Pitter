@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 import uuid
 
@@ -7,4 +9,4 @@ class Wall(models.Model):
     user_id = models.CharField(max_length=128)
     pitt_id = models.CharField(max_length=128)
     comment = models.CharField(max_length=128)
-    date = models.DateTimeField()
+    date = models.DateTimeField(default=datetime.now)
