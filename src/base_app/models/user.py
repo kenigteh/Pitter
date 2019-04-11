@@ -9,6 +9,3 @@ class User(models.Model):
     name = models.CharField(max_length=128)
     email = models.EmailField(max_length=128)
     phone = models.CharField(max_length=128)
-
-    def create_user(self):
-        print(123)
