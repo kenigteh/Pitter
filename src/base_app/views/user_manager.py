@@ -17,7 +17,8 @@ class UserManager(APIView):
 
     def get(self, request):
         try:
-            login = request.data['login']
+            login = request.GET['login']
+            print(login)
             user = User.objects.get(login=login)
             serializer = UserSerializer(user)
             return JsonResponse(serializer.data)
@@ -27,6 +28,7 @@ class UserManager(APIView):
 
     def delete(self, request):
         try:
+            print(request.data)
             login = request.data['login']
             user = User.objects.get(login=login)
             user.delete()
