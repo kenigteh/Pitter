@@ -1,5 +1,5 @@
 import requests
-from base_app import constants
+from api import constants
 from help_functions import functions
 
 REQ_DATA = constants.REQ_DATA

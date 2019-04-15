@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('base_app', '0003_pitt_wall'),
+        ('api', '0003_pitt_wall'),
     ]
 
     operations = [
