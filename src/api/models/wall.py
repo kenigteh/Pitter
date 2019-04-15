@@ -1,7 +1,7 @@
+import uuid
 from datetime import datetime
 
 from django.db import models
-import uuid
 
 
 class Wall(models.Model):

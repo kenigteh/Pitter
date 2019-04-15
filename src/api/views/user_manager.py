@@ -2,8 +2,9 @@ from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from api.serializers.user_serializer import UserSerializer
+
 from api.models.user import User
+from api.serializers.user_serializer import UserSerializer
 
 
 class UserManager(APIView):
