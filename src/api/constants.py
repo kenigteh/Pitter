@@ -9,3 +9,6 @@ REQ_DATA = {
 rest_file_type = "<class 'django.core.files.uploadedfile.InMemoryUploadedFile'>"
 
 audio_files_path = "media/audio-files"
+
+with open("files/secret.txt") as f:
+    secret = f.read()
