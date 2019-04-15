@@ -24,7 +24,7 @@ class Authorization(APIView):
         user = User.objects.get(login=login, password=password)
         if not user:
             data = {"error": "Your login or password is incorrect"}
-            return Response(data, status=400)
+            return Response(data, status=401)
 
         data = {"key": self.create_jwt(login)}
         return Response(data, status=200)
