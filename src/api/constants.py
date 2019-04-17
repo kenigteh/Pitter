@@ -12,3 +12,6 @@ audio_files_path = "media/audio-files"
 
 with open("files/secret.txt") as f:
     secret = f.read()
+
+with open("files/public_key.txt") as f:
+    public_key = f.read()
