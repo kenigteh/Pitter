@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api.models.user import User
+from api.models import User
 from api.serializers.user_serializer import UserSerializer
 
 
