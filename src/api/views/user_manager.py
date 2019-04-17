@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from api.models import User
+from api.my_functions import decode_token
 from api.serializers.user_serializer import UserSerializer
 
 
@@ -29,8 +30,9 @@ class UserManager(APIView):
 
     def delete(self, request):
         try:
-            print(request.data)
-            login = request.data['login']
+            token = request.data.get("token")
+            token = decode_token(token)
+            login = token.get("login")
             user = User.objects.get(login=login)
             user.delete()
             data = {"status": "Delete success!"}
