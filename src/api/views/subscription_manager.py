@@ -11,9 +11,9 @@ from api.decorators import token_validation, login_validation
 
 class SubManager(APIView):
     @staticmethod
-    @login_validation
     @token_validation
-    def put(request):
+    @login_validation
+    def post(request):
         user_to = request.data.get("user_to")
 
         if not user_to:
@@ -58,8 +58,8 @@ class SubManager(APIView):
         return Response(data=data, status=status.HTTP_200_OK)
 
     @staticmethod
-    @login_validation
     @token_validation
+    @login_validation
     def delete(request):
         user_to = request.data.get("user_to")
         if not user_to:
