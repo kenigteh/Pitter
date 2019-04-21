@@ -4,7 +4,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from api.models import User
-from api.my_functions import decode_token
 from api.serializers.user_serializer import UserSerializer
 
 

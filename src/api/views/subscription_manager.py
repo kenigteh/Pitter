@@ -5,11 +5,13 @@ from rest_framework.views import APIView
 
 from api.models import Subscription
 from api.models import User
-from api.my_functions import decode_token, my_send_email
+from api.my_functions import my_send_email
+from api.decorators import token_validation
 
 
 class SubManager(APIView):
     @staticmethod
+    @token_validation
     def put(request):
         token = request.data.get("token")
         user_to = request.data.get("user_to")
@@ -51,19 +53,9 @@ class SubManager(APIView):
         return Response(data=data, status=status.HTTP_201_CREATED)
 
     @staticmethod
+    @token_validation
     def get(request):
-        token = request.data.get("token")
-        if not token:
-            data = dict(error="Bad request!")
-            return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
-
-        token = decode_token(token)
-        if not token:
-            data = dict(error="Bad token!")
-            return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
-
-        user_login = token.get('login')
-
+        user_login = request.current_app.get('user_login')
         try:
             user_id = User.objects.get(login=user_login).user_id
         except ObjectDoesNotExist:
@@ -88,6 +80,7 @@ class SubManager(APIView):
         return Response(data=data, status=status.HTTP_200_OK)
 
     @staticmethod
+    @token_validation
     def delete(request):
         token = request.data.get("token")
         user_to = request.data.get("user_to")
