@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 
 from api.models import Subscription
 from api.models import User
-from api.my_functions import my_send_email
+from api.celery import my_send_email
 from api.decorators import token_validation, login_validation
 
 
@@ -30,10 +30,10 @@ class SubManager(APIView):
 
         Subscription.objects.create(user_from=user_from_id, user_to=user_to_id)
 
-        my_send_email(subject="На вас подписались!",
-                      message=f"Пользователь {user_to} подписался на вас в Питтере!",
-                      from_email='Pitter@ferf.com',
-                      recipient_list=['artemon1002@mail.ru'])
+        my_send_email.delay(subject="На вас подписались!",
+                            message=f"Пользователь {user_to} подписался на вас в Питтере!",
+                            from_email='Pitter@ferf.com',
+                            recipient_list=['artemon1002@mail.ru'])
 
         data = dict(status="Success!")
         return Response(data=data, status=status.HTTP_201_CREATED)
