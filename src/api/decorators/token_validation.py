@@ -15,6 +15,7 @@ def decode_token(encoded_token):
 
 def token_validation(func):
     def wrapper(request):
+        print(request.query_params)
         token = request.data.get("token")
         if not token:
             data = dict(error="Bad request!")

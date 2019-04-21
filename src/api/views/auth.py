@@ -12,7 +12,7 @@ class Authorization(APIView):
     @staticmethod
     def create_jwt(login):
         encoded_jwt = jwt.encode(
-            {'login': login},
+            dict(login=login),
             str(secret),
             algorithm='RS256')
         return encoded_jwt
@@ -23,7 +23,7 @@ class Authorization(APIView):
             login = request.data['login']
             password = request.data['password']
         except KeyError:
-            data = {"error": "No user password or login!"}
+            data = dict(error="No user password or login!")
             return Response(data, status=400)
 
         try:
@@ -33,8 +33,8 @@ class Authorization(APIView):
             return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
 
         if not user:
-            data = {"error": "Your login or password is incorrect"}
+            data = dict(error="Your login or password is incorrect")
             return Response(data, status=401)
 
-        data = {"key": self.create_jwt(login)}
+        data = dict(key=self.create_jwt(login))
         return Response(data, status=200)
