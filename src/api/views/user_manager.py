@@ -8,7 +8,8 @@ from api.serializers.user_serializer import UserSerializer
 
 
 class UserManager(APIView):
-    def post(self, request):
+    @staticmethod
+    def post(request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -16,10 +17,10 @@ class UserManager(APIView):
             return Response(data=data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=400)
 
-    def get(self, request):
+    @staticmethod
+    def get(request):
         try:
             login = request.GET['login']
-            print(login)
             user = User.objects.get(login=login)
             serializer = UserSerializer(user)
             return JsonResponse(serializer.data)
@@ -27,7 +28,8 @@ class UserManager(APIView):
             data = {"error": str(e)}
             return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request):
+    @staticmethod
+    def delete(request):
         try:
             token = request.data.get("token")
             token = decode_token(token)

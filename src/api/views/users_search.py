@@ -2,22 +2,18 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from api.decorators import token_validation
 from api.models import User
 
 
 class UsersSearch(APIView):
     @staticmethod
+    @token_validation
     def post(request):
-        token = request.data.get("token")
         logins = request.data.get("logins")
 
-        if not token or logins is None or not isinstance(logins, list):
+        if logins is None or not isinstance(logins, list):
             data = dict(error="Bad request!")
-            return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
-
-        token = decode_token(token)
-        if not token:
-            data = dict(error="Bad token!")
             return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
 
         if logins:
@@ -32,23 +28,18 @@ class UsersSearch(APIView):
                     login=user.login,
                     name=user.name
                 ))
-            except:
+            except KeyError:
                 continue
         resp_data = dict(status="Success!", data=data)
         return Response(data=resp_data, status=status.HTTP_200_OK)
 
     @staticmethod
+    @token_validation
     def get(request):
-        token = request.data.get("token")
         login = request.data.get("login")
 
-        if not token or not login or not isinstance(login, str):
+        if not login or not isinstance(login, str):
             data = dict(status="Bad request!")
-            return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
-
-        token = decode_token(token)
-        if not token:
-            data = dict(error="Bad token!")
             return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
 
         users = User.objects.filter(login__icontains=login)
@@ -59,7 +50,7 @@ class UsersSearch(APIView):
                     login=user.login,
                     name=user.name
                 ))
-            except:
+            except KeyError:
                 continue
         resp_data = dict(status="Success!", data=data)
         return Response(data=resp_data, status=status.HTTP_200_OK)

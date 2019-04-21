@@ -1,4 +1,6 @@
 import jwt
+from django.core.exceptions import ObjectDoesNotExist
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -7,13 +9,15 @@ from api.models import User
 
 
 class Authorization(APIView):
-    def create_jwt(self, login):
+    @staticmethod
+    def create_jwt(login):
         encoded_jwt = jwt.encode(
             {'login': login},
             str(secret),
             algorithm='RS256')
         return encoded_jwt
 
+    @staticmethod
     def post(self, request):
         try:
             login = request.data['login']
@@ -22,7 +26,12 @@ class Authorization(APIView):
             data = {"error": "No user password or login!"}
             return Response(data, status=400)
 
-        user = User.objects.get(login=login, password=password)
+        try:
+            user = User.objects.get(login=login, password=password)
+        except ObjectDoesNotExist:
+            data = dict(error="User not found!")
+            return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
+
         if not user:
             data = {"error": "Your login or password is incorrect"}
             return Response(data, status=401)
