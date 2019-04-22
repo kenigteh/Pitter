@@ -42,6 +42,25 @@ class Pitts(APIView):
             data = dict(error="User to not found!")
             return Response(data=data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        pitts = list(Pitt.objects.filter(user_id=user_id).values_list('audio_file', 'audio_text', 'date'))
+        pitts = list(Pitt.objects.filter(user_id=user_id).values_list('pitt_id', 'audio_file', 'audio_text', 'date'))
         data = dict(status="Success!", pitts=pitts)
+        return JsonResponse(data=data, status=status.HTTP_200_OK)
+
+    @staticmethod
+    @token_validation
+    def delete(request):
+        pitt_id = request.data.get('pitt_id')
+
+        if not pitt_id or not isinstance(pitt_id, str):
+            data = dict(error="Bad request!")
+            return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            pitt = Pitt.objects.get(pitt_id=pitt_id)
+        except ObjectDoesNotExist:
+            data = dict(error="Pitt not found!")
+            return Response(data=data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        pitt.delete()
+        data = dict(status="Success!")
         return Response(data=data, status=status.HTTP_200_OK)
