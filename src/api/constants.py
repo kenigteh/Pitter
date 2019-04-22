@@ -1,3 +1,5 @@
+# Данные здесь на время разработки. Заменю на переменные окружения в конце разработки.
+
 key = 'AIzaSyAPgaSnLgDd0tIP_YxfKXBf59fNQ-IKocA'
 url = f"https://speech.googleapis.com/v1/speech:recognize?alt=json&key={key}"
 

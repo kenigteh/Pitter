@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'api',
 ]
 
+# Заменить на переменные окружения в конце разработки
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '465'
