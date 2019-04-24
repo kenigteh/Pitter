@@ -172,3 +172,4 @@ fabric.properties
 .local.env
 
 src/api/migrations
+src/api/audiofiles

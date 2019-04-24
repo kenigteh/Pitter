@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from api.decorators import token_validation, login_validation
-from api.models import Subscription
 from api.models import Pitt
+from api.models import Subscription
 from api.models import User
 
 
