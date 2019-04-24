@@ -3,10 +3,10 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api.models import Subscription
-from api.models import User
 from api.celery import my_send_email
 from api.decorators import token_validation, login_validation
+from api.models import Subscription
+from api.models import User
 
 
 class SubManager(APIView):
@@ -39,7 +39,7 @@ class SubManager(APIView):
                                 message=f"Пользователь {user_to} подписался на вас в Питтере!",
                                 from_email='Pitter@ferf.com',
                                 recipient_list=['artemon1002@mail.ru'])
-        except:
+        except ConnectionError:
             pass
 
         data = dict(status="Success!")

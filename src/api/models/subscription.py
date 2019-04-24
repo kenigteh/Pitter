@@ -2,7 +2,6 @@ import uuid
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
-from rest_framework.exceptions import ValidationError
 
 
 class Subscription(models.Model):
