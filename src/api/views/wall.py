@@ -14,12 +14,13 @@ class Wall(APIView):
     @token_validation
     @login_validation
     def post(request):
-        offset = request.data.get('offset')
+        offset = request.data.get('offset', '0')
         if not offset or not isinstance(offset, str) and not offset.isdiggit():
             data = dict(error='Bad offset')
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
         user_id = request.current_app.get('user_id')
+
         subs = Subscription.objects.filter(user_from=user_id)
         users_to_ids = [i.user_to for i in subs]
         wall_data = []
