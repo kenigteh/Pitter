@@ -59,6 +59,7 @@ class Pitts(APIView):
 
     @staticmethod
     @token_validation
+    @login_validation
     def delete(request):
         pitt_id = request.data.get('pitt_id')
 
@@ -66,8 +67,9 @@ class Pitts(APIView):
             data = dict(error="Bad request!")
             return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
 
+        user_id = request.current_app.get('user_id')
         try:
-            pitt = Pitt.objects.get(pitt_id=pitt_id)
+            pitt = Pitt.objects.get(user_id=user_id, pitt_id=pitt_id)
         except ObjectDoesNotExist:
             data = dict(error="Pitt not found!")
             return Response(data=data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
