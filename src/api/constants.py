@@ -8,7 +8,7 @@ REQ_DATA = {
     'languageCode': 'ru-RU'
 }
 
-rest_file_type = "<class 'django.core.files.uploadedfile.InMemoryUploadedFile'>"
+AUDIO_FORMAT = 'flac'
 
 audio_files_path = 'media/audio-files'
 
