@@ -28,7 +28,11 @@ class SubManager(APIView):
             data = dict(error="User to not found!")
             return Response(data=data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        Subscription.validate_unique()
+        if not Subscription.validate_unique(user_from=user_from_id,
+                                            user_to=user_to_id):
+            data = dict(status="Success!")
+            return Response(data=data, status=status.HTTP_200_OK)
+
         Subscription.objects.create(user_from=user_from_id, user_to=user_to_id)
         try:
             my_send_email.delay(subject="На вас подписались!",
