@@ -3,6 +3,7 @@ from .auth import Authorization
 from .subscription_manager import SubManager
 from .users_search import UsersSearch
 from .pitts import Pitts
+from .wall import Wall
 
 __all__ = [
     'UserManager',
@@ -10,4 +11,5 @@ __all__ = [
     'SubManager',
     'UsersSearch',
     'Pitts',
+    'Wall',
 ]

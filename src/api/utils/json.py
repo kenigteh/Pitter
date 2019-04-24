@@ -39,25 +39,25 @@ class Json(View):
 
     @classmethod
     def expires(cls, request=None, *args, **kwargs):
-        """
+        '''
         Lazy evaluated response cache TTL in seconds,
         corresponds to the Cache-Control's max-age value
         and also used to evaluate Expires header
-        """
+        '''
         return 0  # cache disabled
 
     @classmethod
     def last_modified(cls, request, *args, **kwargs):
-        """
+        '''
         Lazy evaluated value of Last-Modified header
-        """
+        '''
         pass
 
     @classmethod
     def etag(cls, request, *args, **kwargs):
-        """
+        '''
         Lazy evaluated value of ETag header
-        """
+        '''
         pass
 
     @classonlymethod

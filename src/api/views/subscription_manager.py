@@ -29,11 +29,13 @@ class SubManager(APIView):
             return Response(data=data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         Subscription.objects.create(user_from=user_from_id, user_to=user_to_id)
-
-        my_send_email.delay(subject="На вас подписались!",
-                            message=f"Пользователь {user_to} подписался на вас в Питтере!",
-                            from_email='Pitter@ferf.com',
-                            recipient_list=['artemon1002@mail.ru'])
+        try:
+            my_send_email.delay(subject="На вас подписались!",
+                                message=f"Пользователь {user_to} подписался на вас в Питтере!",
+                                from_email='Pitter@ferf.com',
+                                recipient_list=['artemon1002@mail.ru'])
+        except:
+            pass
 
         data = dict(status="Success!")
         return Response(data=data, status=status.HTTP_201_CREATED)

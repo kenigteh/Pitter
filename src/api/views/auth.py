@@ -17,8 +17,8 @@ class Authorization(APIView):
             algorithm='RS256')
         return encoded_jwt
 
-    @staticmethod
     def post(self, request):
+        print(1)
         try:
             login = request.data['login']
             password = request.data['password']

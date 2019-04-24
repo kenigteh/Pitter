@@ -8,4 +8,5 @@ urlpatterns = [
     url('users/subscriptions', views.SubManager.as_view()),
     url('users/auth', views.Authorization.as_view()),
     url('pitts', views.Pitts.as_view()),
+    url('wall', views.Wall.as_view()),
 ]
