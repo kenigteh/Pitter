@@ -13,7 +13,16 @@ import logging
 import os
 import sys
 
+import sentry_sdk
+import sentry_sdk
 from dotenv import load_dotenv
+from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    dsn="https://3bd312f64ff940bdb33b59abd7c035aa@sentry.io/1446497",
+    integrations=[DjangoIntegration()]
+)
 
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 load_dotenv(dotenv_path)
