@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api',
+    'proj',
 ]
 
 # Заменить на переменные окружения в конце разработки
