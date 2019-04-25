@@ -6,6 +6,8 @@ from rest_framework.views import APIView
 
 from api.decorators import token_validation, login_validation
 from api.models import User
+from api.models import Subscription
+from api.models import Pitt
 from api.serializers.user_serializer import UserSerializer
 
 
@@ -43,6 +45,11 @@ class UserManager(APIView):
         except ObjectDoesNotExist:
             data = dict(error="User not found!")
             return Response(data=data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        Subscription.objects.filter(user_from=user_id).delete()
+        Subscription.objects.filter(user_to=user_id).delete()
+
+        Pitt.objects.filter(user_id=user_id).delete()
 
         user.delete()
         data = dict(status="Delete success!")
