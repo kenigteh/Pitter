@@ -21,7 +21,7 @@ class Authorization(APIView):
         login = request.data.get('login', False)
         password = request.data.get('password', False)
         if not login or not password:
-            data = dict(error="No user password or login!")
+            data = dict(error="Bad request!")
             return Response(data, status=400)
 
         try:

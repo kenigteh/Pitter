@@ -47,6 +47,6 @@ class Wall(APIView):
         offset = abs(int(offset))
         wall_data = wall_data[offset:offset + 30]
 
-        data = dict(status='Succes',
+        data = dict(status='Success',
                     data=wall_data)
         return Response(data, status=status.HTTP_200_OK)

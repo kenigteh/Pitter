@@ -41,7 +41,7 @@ class Pitts(APIView):
     @staticmethod
     @token_validation
     def get(request):
-        login = request.data.get('login')
+        login = request.data.get('login', False)
 
         if not login or not isinstance(login, str):
             data = dict(error="Bad request!")
@@ -50,7 +50,7 @@ class Pitts(APIView):
         try:
             user_id = User.objects.get(login=login).user_id
         except ObjectDoesNotExist:
-            data = dict(error="User to not found!")
+            data = dict(error="User not found!")
             return Response(data=data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         pitts = list(Pitt.objects.filter(user_id=user_id).values_list('pitt_id', 'audio_file', 'audio_text', 'date'))
