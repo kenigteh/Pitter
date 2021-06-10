@@ -8,7 +8,7 @@ cffi==1.12.2
 chardet==3.0.4
 crcmod==1.7
 cryptography==2.6.1
-Django==2.1.7
+Django==2.2.24
 django-appconf==1.0.3
 django-cache==0.1.3
 djangorestframework==3.9.2
