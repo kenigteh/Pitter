@@ -22,7 +22,7 @@ pycodestyle==2.5.0
 pycparser==2.19
 pydub==0.23.1
 pyflakes==2.1.1
-PyJWT==1.7.1
+PyJWT==2.4.0
 python-dotenv==0.10.1
 pytz==2018.9
 redis==3.2.1
